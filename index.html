@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/hw.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src='js/jquery-1.12.4.js'></script>
+    <script src='js/touch-0.2.14.min.js'></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class='container' id='container'>
+        <div class="cute" id='cute'>
+            <div class="slide1">
+                <div class="wrap">
+                    <img src="images/cover.png" alt="" class='img_1'>
+                    <img src="images/wording_cover.png" alt="" class='img_2'>
+                    <img src="images/icon_up.png" alt="" class='img_3'>
+                </div>
+            </div>
+            <div class="slide2" id='slide2'>
+                <div class="wrap_1">
+                    <img src="images/wording.png" alt="" class='img_1'>
+                    <img src="images/floating_develop.png" alt="" class='img_2'>
+                    <img src="images/people.png" alt="" class='img_3'>
+                    <img src="images/circle.png" alt="" class='img_4'>
+                    <img src="images/check_develop.png" alt="" class='img_5'>
+                    <img src="images/icon_up.png" alt="" class='img_6'>
+                    <img src="images/dot1.png" alt="" class='img_7'>
+                </div>
+
+                <div class="wrap_2">
+                    <img src="images/introduction.png" alt="" class='img_1'>
+                    <img src="images/btn_develop.png" alt="" class='img_2'>
+                    <img src="images/dot2.png" alt="" class='img_3'>
+                    <img src="images/icon_up.png" alt="" class='img_4'>
+                </div>
+
+            </div>
+
+            <div class="slide3" id='slide3'>
+                <div class="wrap_1">
+                    <img src="images/wording_design.png" alt="" class='img_1'>
+                    <img src="images/circle-design.png" alt="" class='img_2'>
+                    <img src="images/people_design.png" alt="" class='img_3'>
+                    <img src="images/icon_up.png" alt="" class='img_4'>
+                    <img src="images/floating_design.png" alt="" class='img_5'>
+                    
+                    <img src="images/check_design.png" alt="" class='img_6'>
+                    <img src="images/dot1.png" alt="" class='img_7'>
+                </div>
+
+                <div class="wrap_2">
+                    <img src="images/introduction_design.png" alt="" class='img_1'>
+                    <img src="images/btn_design.png" alt="" class='img_2'>
+                    <img src="images/dot2.png" alt="" class='img_3'>
+                    <img src="images/icon_up.png" alt="" class='img_4'>
+                </div>
+           
+
+
+                
+            </div>
+
+
+            <div class="slide4" id='slide4'>
+                 <div class="wrap_1">
+                    <img src="images/wording_production.png" alt="" class='img_1'>
+                    <img src="images/circle-production.png" alt="" class='img_2'>
+                    <img src="images/people_production.png" alt="" class='img_3'>
+                    <img src="images/floating_production.png" alt="" class='img_4'>
+
+                    <img src="images/pic_shadow_production.png" alt="" class='img_5'>
+                     
+                    <img src="images/check_design.png" alt="" class='img_6'>
+                    <img src="images/dot1.png" alt="" class='img_7'>
+                    <img src="images/icon_up.png" alt="" class='img_8'> 
+
+                 </div>
+
+                <div class="wrap_2">
+                    <img src="images/introduction_production.png" alt="" class='img_1'>
+                    <img src="images/btn_production.png" alt="" class='img_2'>
+                    <img src="images/icon_up.png" alt="" class='img_3'>
+                    <img src="images/dot1.png" alt="" class='img_4'>
+                 
+                </div>
+
+
+
+            </div>
+
+            <div class="slide5">
+                <div class="wrap_1">
+                    <img src="images/pic_back.png" alt="" class='img_1'>
+                    <img src="images/btn_join.png" alt="" class='img_2'>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+window.onload=function(){
+    var con = document.getElementById('container');
+    var cute = document.getElementById('cute');
+    var slide2 =document.getElementById('slide2');
+    var slide3 =document.getElementById('slide3');
+    var slide4 =document.getElementById('slide4');
+    var page=0;
+
+    touch.on(con,'touchstart',function(ev){
+        ev.preventDefault();
+    });
+
+    touch.on(cute,'swipeup',function(eve){
+        page++;
+        if(page >=4){
+            page=4
+        }
+        console.log(page-1);
+        console.log($('#cute').children().eq(1))
+
+
+        
+        $('#cute').animate({'top':page*(-100)+'%'},function(){
+            $('#cute').children().eq(page-1).removeClass('move_'+page);
+            $('#cute').children().eq(page-1).removeClass('move_'+page+'_'+2);
+            $('#cute').children().eq(page-1).css('left',0);
+            $('#cute').children().eq(page).addClass('move_'+(page+1));
+
+        })
+
+    })
+    touch.on(cute,'swipedown',function(){
+
+        page--;
+        if(page <=0){
+            page=0;
+        }
+        $('#cute').animate({'top':page*(-100)+'%'},function(){
+            $('#cute').children().eq(page).addClass('move_'+(page+1));
+            $('#cute').children().eq(page+1).css('left',0);
+            $('#cute').children().eq(page+1).removeClass('move_'+(page+2));
+            $('#cute').children().eq(page+1).removeClass('move_'+(page+2)+'_'+2);
+        })
+    })
+
+
+    function move(obj,str){
+        touch.on(obj,'swipeleft',function(){
+            // console.log(this)
+            $('#'+str+'').animate({'left':(-100)+'%'},function(){
+                $('#cute').children().eq(page).removeClass('move_'+(page+1));
+                $('#cute').children().eq(page).addClass('move_'+(page+1)+'_'+2);
+                
+            })
+        })
+
+        touch.on(obj,'swiperight',function(){
+            $('#'+str+'').animate({'left':'0%'},function(){
+                $('#cute').children().eq(page).addClass('move_'+(page+1));
+                $('#cute').children().eq(page).removeClass('move_'+(page+1)+'_'+2);
+            })
+
+        })
+    }
+
+ 
+        move(slide2,'slide2');
+        move(slide3,'slide3');
+        move(slide4,'slide4');
+      
+
+
+	 
+		$('.slide1').addClass('move_1')
+
+	 
+       
+
+
+    
+
+        
+
+    
+}
+
+
+</script>
+</html>
